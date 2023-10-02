@@ -13,6 +13,7 @@ export type MessageBodyType =
     | 'OneProjectDefinition'
     | 'OnePresetDefinition'
     | 'OneAreaSceneDefinition'
+    | 'MultipleAreaSceneDefinition'
     | 'OneLinkDefinition'
     | 'OneLinkNodeDefinition'
     | 'MultipleLinkNodeDefinition'
@@ -53,6 +54,10 @@ export class OneDeviceStatus {
 
 export class OneAreaSceneDefinition {
     AreaScene!: AreaSceneDefinition;
+}
+
+export class MultipleAreaSceneDefinition {
+    AreaScenes!: AreaSceneDefinition[];
 }
 
 export class OnePresetDefinition {
@@ -195,6 +200,7 @@ export type BodyType =
     | OneProjectDefinition
     | OnePresetDefinition
     | OneAreaSceneDefinition
+    | MultipleAreaSceneDefinition
     | OneLinkDefinition
     | OneLinkNodeDefinition
     | MultipleLinkNodeDefinition
@@ -241,6 +247,9 @@ export function parseBody(type: MessageBodyType, data: object): BodyType {
             break;
         case 'OneAreaSceneDefinition':
             theType = OneAreaSceneDefinition;
+            break;
+        case 'MultipleAreaSceneDefinition':
+            theType = MultipleAreaSceneDefinition;
             break;
         case 'MultipleAreaDefinition':
             theType = MultipleAreaDefinition;
