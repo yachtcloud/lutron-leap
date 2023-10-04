@@ -31,6 +31,7 @@ export type MessageBodyType =
     | 'MultipleZoneDefinition'
     | 'OneZoneStatus'
     | 'MultipleZoneStatus'
+    | 'OneLEDStatus'
     | 'OnePingResponse'
     | 'OneButtonGroupDefinition'
     | 'MultipleButtonGroupDefinition'
@@ -132,6 +133,10 @@ export class MultipleZoneStatus {
     ZoneStatuses!: ZoneStatus[];
 }
 
+export class OneLEDStatus {
+    LEDStatus!: LEDStatus;
+}
+
 export class OnePingResponse {
     PingResponse!: PingResponseDefinition;
 }
@@ -218,6 +223,7 @@ export type BodyType =
     | MultipleDeviceDefinition
     | OneZoneStatus
     | MultipleZoneStatus
+    | OneLEDStatus
     | OnePingResponse
     | OneButtonGroupDefinition
     | MultipleButtonGroupDefinition
@@ -265,6 +271,9 @@ export function parseBody(type: MessageBodyType, data: object): BodyType {
             break;
         case 'MultipleZoneStatus':
             theType = MultipleZoneStatus;
+            break;
+        case 'OneLEDStatus':
+            theType = OneLEDStatus;
             break;
         case 'OnePingResponse':
             theType = OnePingResponse;
@@ -484,6 +493,11 @@ export type ZoneStatus = Href & {
     AssociatedArea: Href;
     Availability: 'Available' | 'Unavailable' | 'Mixed' | 'Unknown';
     Tilt: number;
+};
+
+export type LEDStatus = Href & {
+    LED: Href;
+    State: 'On' | 'Off';
 };
 
 export type Category = {
